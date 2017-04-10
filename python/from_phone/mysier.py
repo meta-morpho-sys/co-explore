@@ -11,6 +11,6 @@ def picture_bits(b):
    return s
    
 r = 1
-while r < 2**128:
+while r < 2**32:
     print(picture_bits(r))
     r ^= (r<<1)
