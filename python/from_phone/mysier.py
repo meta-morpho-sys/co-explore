@@ -28,8 +28,84 @@ Answers:
    --------|------
      a   0 | 0  1
          1 | 1  1
-    
+         
+  NOTE: XOR is defined for larger integers than just 0 and 1, by applying it BITWISE.
+        What do I mean by BITWISE?  Answer: a bit (aka binary-digit) at a time.
+        
+        e.g.
+        
+        0b10110 ^ 0b11011
+        
+            a = 0b10110
+            b = 0b11011
+        a ^ b = 0b01101
+        
+        
+        
+ 
+3. << is the binary shift left operator, which is mathematically equivalent to DOUBLING a number.
   
+4. This would be the pattern if we just shifted left repeatedly
+   1
+   10
+   100
+   1000
+   10000
+   100000
+   1000000
+
+
+r = 1
+r ^= (r<<1)
+
+r << 1     =>  0b10
+r ^ (r<<1) =>  0b1 ^ 0b10 => 0b11
+
+       0b1
+      0b10
+
+
+001
+010
+100
+
+r = 0b11
+r ^ = (r<<1) =>  0b11 ^ 0b110
+   0b011
+   0b110
+ = 0b101
+
+r = 0b101
+
+   0b0101
+   0b1010
+ = 0b1111
+ 
+ 1
+ 11
+ 101
+ 1111
+ 
+ r = 01111
+ s = 11110
+   = 10001
+   
+010001
+0110011
+01010101
+011111111
+
+Claim: For a and b being 0 or 1
+a^b =====  (a + b) mod 2   === (a+b)%2
+   
+              b
+  (a+b)%2  | 0  1
+   --------|------
+     a   0 | 0  1
+         1 | 1  0
+
+   
+
 
 """
 
