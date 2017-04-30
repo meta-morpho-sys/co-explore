@@ -88,8 +88,8 @@
 import sys
 import os
 
-from tkinter import *
-from idlelib.ColorDelegator import ColorDelegator, color_config
+from Tkinter import *
+from idlelib.ColorDelegator import ColorDelegator
 from idlelib.Percolator import Percolator
 from idlelib.textView import view_text
 from turtledemo import __doc__ as about_turtledemo
@@ -206,7 +206,6 @@ class DemoWindow(object):
         self.text_frame = text_frame = Frame(root)
         self.text = text = Text(text_frame, name='text', padx=5,
                                 wrap='none', width=45)
-        color_config(text)
 
         self.vbar = vbar = Scrollbar(text_frame, name='vbar')
         vbar['command'] = text.yview
