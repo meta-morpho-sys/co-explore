@@ -88,7 +88,12 @@
 import sys
 import os
 
-from Tkinter import *
+
+if sys.version_info > (3, 0):
+    from tkinter import *  # Python 3 code
+else:
+    from Tkinter import *  # Python 2 code
+
 from idlelib.ColorDelegator import ColorDelegator
 from idlelib.Percolator import Percolator
 from idlelib.textView import view_text
