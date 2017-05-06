@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Playing</title>
+	</head>
+	
+	<body>
+		<div>
+			<input id="turnAngle" type="range" min="1" max="40" step="1" onchange="changeAngle()">
+			<input id="turnAngleTextBox" type="text" size="3">
+		</div>
+
+		<canvas id="myCanvas" width="800" height="800">
+		Your browser does not support the HTML5 canvas tag.
+		</canvas>
+	<script>
+	
+	var canvas = document.getElementById("myCanvas");
+	canvas.style.backgroundColor = "blue";
+	var context = canvas.getContext("2d");
+	context.lineWidth = 3;  								// like turtle.pensize(3)
+
+	function changeAngle() {
+		var slider = document.getElementById("turnAngle");
+		var textbox = document.getElementById("turnAngleTextBox");
+		textbox.value = slider.value;
+		setupCanvas();
+		drawPicture(slider.value); 
+	}
+
+	function setupCanvas() {
+		context.setTransform(1, 0, 0, 1, 0, 0);
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		context.translate(400, 400);  							// like moving the turtle to the center
+	}
+
+	function drawCircles(ctx, col, turnAngleInDegrees) {
+		ctx.strokeStyle = col;  							// like turtle.color(col)
+		
+		var radius = 80;
+		
+	        numCircles = Math.floor(360 / turnAngleInDegrees);
+	        for (var i = 0; i < numCircles; i++) {
+			ctx.beginPath();
+			
+			ctx.arc(-radius, 0, radius, 0, 2 * Math.PI);  	// like turtle.circle(80)
+			
+			ctx.stroke();
+			ctx.rotate(turnAngleInDegrees * Math.PI / 180); // like turtle.right(turnAngleInDegrees)
+		}
+	}
+
+	function drawPicture(turnAngleInDegrees) {	
+		console.log('Starting...');
+		context.translate(30, -120);							// shift centre to fit things onscreen
+	
+		for (var i = 0; i < 9; i++) {
+			context.translate(100, 0);							// like turtle.forward(100)
+	
+			drawCircles(context, "white", turnAngleInDegrees);
+			
+			context.translate(-100, 0);							// like turtle.backward(100)
+			context.rotate(45 * Math.PI / 180);  				// like turtle.right(45)
+			context.translate(100, 0);							// like turtle.forward(100)
+			
+			drawCircles(context, "red", 5);
+		}
+	
+		console.log('...done!');
+	}
+
+	</script>
+	</body>
+</html>
