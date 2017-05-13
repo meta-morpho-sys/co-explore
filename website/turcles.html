@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Playing</title>
+	</head>
+	
+	<body>
+		<canvas id="myCanvas" width="800" height="800">
+		Your browser does not support the HTML5 canvas tag.
+		</canvas>
+	<script>
+	console.log('Starting...');
+	
+	var canvas = document.getElementById("myCanvas");
+	canvas.style.backgroundColor = "blue";
+	var context = canvas.getContext("2d");
+	context.translate(400, 400);  							// like moving the turtle to the center
+	context.lineWidth = 3;  								// like turtle.pensize(3)
+
+	function drawCircles(ctx, col, turnAngleInDegrees) {
+		ctx.strokeStyle = col;  							// like turtle.color(col)
+		
+		var radius = 80;
+		
+        numCircles = Math.floor(360 / turnAngleInDegrees);
+        for (var i = 0; i < numCircles; i++) {
+			ctx.beginPath();
+			
+			ctx.arc(-radius, 0, radius, 0, 2 * Math.PI);  	// like turtle.circle(80)
+			
+			ctx.stroke();
+			ctx.rotate(turnAngleInDegrees * Math.PI / 180); // like turtle.right(turnAngleInDegrees)
+		}
+	}
+	
+	context.translate(30, -120);							// shift centre to fit things onscreen
+
+	for (var i = 0; i < 9; i++) {
+		context.translate(100, 0);							// like turtle.forward(100)
+
+		drawCircles(context, "white", 10);
+		
+		context.translate(-100, 0);							// like turtle.backward(100)
+		context.rotate(45 * Math.PI / 180);  				// like turtle.right(45)
+		context.translate(100, 0);							// like turtle.forward(100)
+		
+		drawCircles(context, "red", 5);
+	}
+	
+	console.log('...done!');
+	</script>
+	</body>
+</html>
