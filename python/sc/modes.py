@@ -52,16 +52,51 @@ def rotate(l, n):
     return l[n:] + l[:n]
 
 
+def steps(notes):
+    """ Calculate intervals between successive notes.
+
+    Example:
+        >>> steps([0, 1, 3, 4, 6, 7, 9])
+        [1, 2, 1, 2, 1, 2]
+
+    """
+    if len(notes) < 2:
+        return []
+    steps = [notes[i]-notes[i-1] for i in range(1, len(notes))]
+    return steps
+
+
+def render(notes):
+    """ Make a picture of the notes.
+
+    Example:
+        >>> render(scale())
+        'x x xx x x x'
+    """
+    scale_steps = steps(notes)
+    output = ''
+    for i in scale_steps:
+        output += 'X' + ' '*(i-1)
+    output += 'X'
+    return output
+
 if __name__ == '__main__':
     #
     # Demonstration
     #
-    print('    Ionion:', scale())
-    print('    Dorian:', scale(1))
-    print('  Phrygian:', scale(3))
-    print('    Lydian:', scale(4))
-    print('Mixolydian:', scale(5))
-    print('   Aeolian:', scale(6))
-    print('   Locrian:', scale(7))
+    def demo(name, scale_notes):
+        print(name, render(scale_notes), scale_notes)
 
-    print('Whole Tone:', scale(scale_steps=[2, 2, 2, 2, 2, 2]))
+    demo('        M7:', [0, 4, 7, 11])
+    demo('        m7:', [0, 3, 7, 11])
+    demo('       dim:', [0, 3, 6, 9, 12])
+    demo('       aug:', [0, 4, 8, 12])
+    demo('    Ionion:', scale())
+    demo('    Dorian:', scale(1))
+    demo('  Phrygian:', scale(3))
+    demo('    Lydian:', scale(4))
+    demo('Mixolydian:', scale(5))
+    demo('   Aeolian:', scale(6))
+    demo('   Locrian:', scale(7))
+
+    demo('Whole Tone:', scale(scale_steps=[2, 2, 2, 2, 2, 2]))
