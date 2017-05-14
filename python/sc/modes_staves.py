@@ -1,11 +1,10 @@
 # This program wil represent graphically the output of the file modes.py
 
 # figure out background photo (for staves)
-## set turtle coordinates  OK
-## figure out turtle stamp() function  OK
 # figure out forward x distance x steps
 
 import turtle
+from modes import scale
 
 
 ##def stavesDrawer():
@@ -20,33 +19,33 @@ import turtle
 ##        
 ##        
 ##stavesDrawer()
-##   
-    
-    
+   
 
-def modesDrawer():
+def initialize_turtle():
     turtle.mode("logo")
     turtle.penup()
-    turtle.goto(-100, 0)
+    start_from = turtle.goto(-200, 0)
     #screen.register_shape("turtle.gif")
     turtle.shape("circle")
-    turtle.shapesize(1, 2)
+    turtle.shapesize(0.5, 1)
     turtle.tilt(40)
     turtle.color("blue")
 
-    ''' numSteps = steps ## will draw notes based on
-        distance in pixels x steps in the scale. will be used in the turtle.fd()
-        The "steps()" function is defined in modes.py
-    '''
-    mode = [0, 3, 6, 9, 12] # this is only example
+initialize_turtle()   
 
-    for i in mode:
+def modes_drawer(mode):
+    
+    for step in mode:
         turtle.stamp();
         turtle.penup();
-        turtle.right(65)
-        turtle.fd(80);
+        turtle.right(80)
+        turtle.fd(10 * step);
         turtle.pendown();
         turtle.setheading(0)
         
-modesDrawer()
+# mode = [0, 3, 6, 9, 12] # this is only example
+
+mode = scale()
+
+modes_drawer(mode)
 
